@@ -1,0 +1,224 @@
+.bottom-panel {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border-top: none;
+  height: 100%;
+  width: 100%;
+}
+
+.bottom-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-xl);
+  border-bottom: 1px solid var(--border-divider);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.bottom-panel__tabs {
+  display: flex;
+  gap: 0;
+}
+
+.bottom-panel__tab {
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.bottom-panel__tab--active {
+  color: var(--text-primary);
+  background: linear-gradient(180deg, rgba(245, 49, 171, 0.16) 0%, rgba(143, 29, 100, 0.02) 100%);
+  border-bottom: 2px solid var(--brand-pink);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.bottom-panel__tab:hover:not(.bottom-panel__tab--active) {
+  color: var(--text-secondary);
+}
+
+.bottom-panel__tab-count {
+  margin-left: 3px;
+  opacity: 0.6;
+}
+
+.bottom-panel__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+  flex-shrink: 0;
+}
+
+.bottom-panel__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bottom-panel__switch {
+  width: 32px;
+  height: 16px;
+  background: var(--border-default);
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.bottom-panel__switch--on {
+  background: var(--brand-pink);
+}
+
+.bottom-panel__switch-thumb {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left var(--transition-fast);
+}
+
+.bottom-panel__switch--on .bottom-panel__switch-thumb {
+  left: 18px;
+}
+
+.history-table__dash {
+  opacity: 0.4;
+}
+
+.bottom-panel__content {
+  flex: 1;
+  overflow: auto;
+}
+
+/* ═══ SHARED TABLE STYLES ═══ */
+.history-table {
+  width: 100%;
+  font-size: var(--fs-sm);
+}
+
+.history-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg-secondary);
+}
+
+.history-table th {
+  padding: 6px 12px;
+  text-align: left;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-divider);
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 8px 12px;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.history-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.history-table__time {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.history-table__market-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.history-table__market-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.history-table__market {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.history-table__market-sub {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+
+.history-table__direction--long,
+.history-table__direction--close-long {
+  color: var(--long-green);
+  font-weight: 500;
+}
+
+.history-table__direction--short,
+.history-table__direction--close-short {
+  color: var(--short-red);
+  font-weight: 500;
+}
+
+.history-table__mono {
+  font-family: var(--font-mono);
+}
+
+.history-table__pnl--positive {
+  color: var(--long-green);
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.history-table__pnl--negative {
+  color: var(--short-red);
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.history-table__close-btn {
+  padding: 3px 10px;
+  font-size: var(--fs-xs);
+  color: var(--brand-pink);
+  border: 1px solid var(--brand-pink-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.history-table__close-btn:hover {
+  background: var(--brand-pink-soft);
+}
+
+.history-table__empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+.history-table__sort {
+  cursor: pointer;
+  user-select: none;
+}
+
+.history-table__sort:hover {
+  color: var(--text-secondary);
+}

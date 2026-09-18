@@ -1,0 +1,112 @@
+.account-panel {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border-top: none;
+  padding: 10px 14px;
+  gap: 10px;
+  height: 100%;
+}
+
+.account-panel__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-panel__title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-panel__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap-sm);
+}
+
+.account-panel__btn {
+  padding: 6px 0;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-align: center;
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+              linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.account-panel__btn:hover:not(.account-panel__btn--active) {
+  background: linear-gradient(var(--bg-hover), var(--bg-hover)) padding-box,
+              linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box;
+  box-shadow: 0 0 8px rgba(245, 49, 171, 0.25);
+}
+
+.account-panel__btn--active {
+  background: var(--brand-gradient) !important;
+  border: 1px solid transparent !important;
+  color: white !important;
+  box-shadow: 0 0 12px rgba(245, 49, 171, 0.35);
+}
+
+.account-panel__btn--active:hover {
+  opacity: 0.92;
+  box-shadow: 0 0 16px rgba(245, 49, 171, 0.45);
+}
+
+.account-panel__section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.account-panel__section-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-panel__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.account-panel__value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: var(--fs-xs);
+}
+
+.account-panel__value--positive {
+  color: var(--long-green);
+}
+
+.account-panel__value--negative {
+  color: var(--short-red);
+}
+
+.account-panel__value--sub {
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+}
+
+.account-panel__margin-gauge {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.account-panel__margin-pct {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
