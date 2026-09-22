@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { AccountSummary } from '@/types/account';
 import { Market } from '@/types/market';
 import { cn, formatNumber } from '@/lib/utils';
@@ -20,20 +19,21 @@ export default function AccountPanel({
   onDeposit,
   onWithdraw,
 }: AccountPanelProps) {
-  const [activeAction, setActiveAction] = useState<'deposit' | 'withdraw' | 'transfer'>('deposit');
   const { connected, balance } = useSolanaAccount();
   const { openDeposit, openWithdraw } = useAppModals();
 
-  const handleAction = (action: 'deposit' | 'withdraw' | 'transfer') => {
-    setActiveAction(action);
-    if (action === 'deposit') {
-      if (onDeposit) onDeposit();
-      else openDeposit();
-    }
-    if (action === 'withdraw') {
-      if (onWithdraw) onWithdraw();
-      else openWithdraw();
-    }
+  const handleDeposit = () => {
+    if (onDeposit) onDeposit();
+    else openDeposit();
+  };
+
+  const handleWithdraw = () => {
+    if (onWithdraw) onWithdraw();
+    else openWithdraw();
+  };
+
+  const handleTransfer = () => {
+    // Optional transfer action
   };
 
   const displayTotalValue =
@@ -42,87 +42,50 @@ export default function AccountPanel({
       : `${formatNumber(account.totalValue)} ${account.token}`;
 
   return (
-    <div className="flex h-full w-full flex-col gap-3 p-3 text-xs bg-transparent">
-      {/* Header & Actions */}
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-white">Account</h3>
-          {connected ? (
-            <span className="flex items-center gap-1 text-[10px] text-long-green font-medium">
-              <span className="h-1.5 w-1.5 rounded-full bg-long-green" />
-              Wallet Live
-            </span>
-          ) : (
-            <span className="text-[10px] text-neutral-500 font-medium">
-              Not Connected
-            </span>
-          )}
-        </div>
-        <div className="grid grid-cols-3 gap-1.5">
-          <button
-            type="button"
-            className={cn(
-              'rounded-full py-1 text-center font-semibold text-[11px] transition-all',
-              activeAction === 'deposit'
-                ? 'text-white shadow-pink-glow'
-                : 'text-neutral-300 hover:text-white'
-            )}
-            style={{
-              background:
-                activeAction === 'deposit'
-                  ? 'linear-gradient(90deg, #F531AB 0%, #8F1D64 100%)'
-                  : 'linear-gradient(#131118, #131118) padding-box, linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box',
-              border: '1px solid transparent',
-            }}
-            onClick={() => handleAction('deposit')}
-          >
-            Deposit
-          </button>
+    <div className="flex h-full w-full flex-col gap-2 p-2.5 text-xs bg-transparent">
+      {/* Top Action Buttons: Deposit, Withdraw, Transfer */}
+      <div className="grid grid-cols-3 gap-1.5 shrink-0">
+        <button
+          type="button"
+          onClick={handleDeposit}
+          className="rounded-full py-1.5 text-center font-semibold text-[11px] text-white shadow-pink-glow transition-all hover:opacity-95"
+          style={{
+            background: 'linear-gradient(90deg, #F531AB 0%, #8F1D64 100%)',
+            border: '1px solid transparent',
+          }}
+        >
+          Deposit
+        </button>
 
-          <button
-            type="button"
-            className={cn(
-              'rounded-full py-1 text-center font-semibold text-[11px] transition-all',
-              activeAction === 'withdraw'
-                ? 'text-white shadow-pink-glow'
-                : 'text-neutral-300 hover:text-white'
-            )}
-            style={{
-              background:
-                activeAction === 'withdraw'
-                  ? 'linear-gradient(90deg, #F531AB 0%, #8F1D64 100%)'
-                  : 'linear-gradient(#131118, #131118) padding-box, linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box',
-              border: '1px solid transparent',
-            }}
-            onClick={() => handleAction('withdraw')}
-          >
-            Withdraw
-          </button>
+        <button
+          type="button"
+          onClick={handleWithdraw}
+          className="rounded-full py-1.5 text-center font-semibold text-[11px] text-neutral-300 hover:text-white transition-all hover:shadow-pink-glow-sm"
+          style={{
+            background:
+              'linear-gradient(#131118, #131118) padding-box, linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box',
+            border: '1px solid transparent',
+          }}
+        >
+          Withdraw
+        </button>
 
-          <button
-            type="button"
-            className={cn(
-              'rounded-full py-1 text-center font-semibold text-[11px] transition-all',
-              activeAction === 'transfer'
-                ? 'text-white shadow-pink-glow'
-                : 'text-neutral-300 hover:text-white'
-            )}
-            style={{
-              background:
-                activeAction === 'transfer'
-                  ? 'linear-gradient(90deg, #F531AB 0%, #8F1D64 100%)'
-                  : 'linear-gradient(#131118, #131118) padding-box, linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box',
-              border: '1px solid transparent',
-            }}
-            onClick={() => handleAction('transfer')}
-          >
-            Transfer
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={handleTransfer}
+          className="rounded-full py-1.5 text-center font-semibold text-[11px] text-neutral-300 hover:text-white transition-all hover:shadow-pink-glow-sm"
+          style={{
+            background:
+              'linear-gradient(#131118, #131118) padding-box, linear-gradient(90deg, #F531AB 0%, #8F1D64 100%) border-box',
+            border: '1px solid transparent',
+          }}
+        >
+          Transfer
+        </button>
       </div>
 
       {/* Account Equity Section */}
-      <div className="flex flex-col gap-1.5 rounded-lg border border-white/5 bg-bg-tertiary/40 p-2.5">
+      <div className="flex flex-col gap-1 rounded-lg border border-white/5 bg-bg-tertiary/40 p-2">
         <div className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">
           Account Equity
         </div>
@@ -155,14 +118,14 @@ export default function AccountPanel({
       </div>
 
       {/* Margin Section */}
-      <div className="flex flex-col gap-1.5 rounded-lg border border-white/5 bg-bg-tertiary/40 p-2.5">
+      <div className="flex flex-col gap-1 rounded-lg border border-white/5 bg-bg-tertiary/40 p-2">
         <div className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">
           Margin
         </div>
         <div className="flex justify-between items-center text-[11px]">
           <span className="text-neutral-400">Margin Ratio</span>
           <div className="flex items-center gap-1.5">
-            <svg width="24" height="24" viewBox="0 0 32 32">
+            <svg width="20" height="20" viewBox="0 0 32 32">
               <circle
                 cx="16"
                 cy="16"
